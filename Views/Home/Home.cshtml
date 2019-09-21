@@ -1,0 +1,59 @@
+@{
+    ViewData["Title"] = "Home";
+}
+@model User
+
+<div class="jumbotron">
+    <h1>Dojo Activity Center</h1>
+    <h5>Welcome @ViewBag.User.Name</h5>
+    <a href="/logout">Logout</a>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Activity</th>
+      <th scope="col">Date and Time</th>
+      <th scope="col">Event Coordinator</th>
+      <th scope="col">No. of Participants</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach(var party in ViewBag.Parties)
+      {
+        <tr>
+            <td><a href="/activity/@party.PartyId">@party.PartyName</a></td>
+            <td>@party.PartyDate & @party.PartyTime</td>
+            <td>@party.Planner.Name</td>
+            <td>@party.AttendingUsers.Count</td>
+            <td>
+                @if(ViewBag.UserId ==@party.PlannerId)
+            {
+                <a href="/cancel/@party.PartyId" class="btn btn-warning">Delete</a>
+            }
+            else
+            {
+                bool IsGoing = false;
+                foreach(var guest in party.AttendingUsers)
+                {
+                    if(guest.UserId == ViewBag.UserId)
+                    {
+                        IsGoing=true;
+                    }
+                }
+                if (IsGoing)
+                {
+                    <a class="btn btn-success" href="/leave/@party.PartyId">Leave</a>
+                }
+                else
+                {
+                    <a class="btn btn-danger" href="/join/@party.PartyId">Join</a>    
+                }
+                
+            }
+            </td>
+        </tr>
+      }
+  </tbody>
+</table>
+  <a href="/new">Add New Activity</a>

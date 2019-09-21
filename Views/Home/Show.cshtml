@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Show Acitivity";
+}
+@model Party 
+
+<div class="jumbotron">
+    <h1>Dojo Activity Center</h1>
+    <a href="/home">Home | </a>
+    <a href="/logout">Logout</a>
+</div>
+<div class="body">
+    <h3>@Model.PartyName</h3>
+    <h6>Event Coordinator: @Model.Planner.Name</h6>
+    <p>Description of the Event: @Model.Description</p>
+    <p>Participants:</p>
+        <ul>
+            @foreach (Join p in Model.AttendingUsers)
+            {
+                <li>@p.Joiner.Name</li>   
+            }
+        </u>
+        
+</div>
+<div>
+    
+</div>

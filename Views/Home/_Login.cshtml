@@ -1,0 +1,23 @@
+@model LoginUser
+
+<form action="/login" method="post" class="card card-body bg-light">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Email Address:</label>
+                <input type="text" name="LoginEmail" placeholder="Email Address" class="form-control" value="cmason@gmail.com" />
+                <span asp-validation-for="LoginEmail"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" name="LoginPassword" placeholder="Password" class="form-control" value="123456789" />
+                <span asp-validation-for="LoginPassword"></span>
+            </div>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Login" />
+</form>
